@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        //The count for how many small, medium and large shirts are in the cart, set to 0 as default
+
+// The cost of each type of shirt
+var priceSmall = 75.00;
+var priceMed = 75.00;
+var priceLarge = 75.00;
+// The sum total of each catergory of shit (count * price) set to 0 as default
+var sumSmall = 0.00;
+var sumMed = 0.00;
+var sumLarge = 0.00;
+
+function viewCart(){
+    if(myCart.getSmall > 0){
+        document.getElementById("cartView").innerHTML = "<h3>Classic Tee<br>" + myCart.getSmall + "x <b> $75.00</b></h3>";
+    }
+    if(myCart.getMed > 0){
+        document.getElementById("cartView").innerHTML += "<h3>Classic Tee<br>" + myCart.getMed + "x <b> $75.00</b></h3>";
+    }
+    if(myCart.getLarge > 0){
+        document.getElementById("cartView").innerHTML += "<h3>Classic Tee<br>" + myCart.getLarge + "x <b> $75.00</b></h3>";
+    }
+}
+
+function hideCart(){
+    document.getElementById("cartView").innerHTML = "";
+}
+
+
+// Cart class, this sets how many items are in the cart and how they will be displayed
+class Cart {
+    constructor(currSmall, currMed, currLarge){
+        this.currSmall = currSmall;
+        this.currMed = currMed;
+        this.currLarge = currLarge;
+    }
+
+    //Getters
+    get totalShirts(){
+        return this.currSmall + this.currMed + this.currLarge;
+    }
+
+    get getSmall(){
+        return this.currSmall;
+    }
+    get getMed(){
+        return this.currMed;
+    }
+    get getLarge(){
+        return this.currLarge;
+    }
+
+    //Setters
+    setSmall(small){
+        this.currSmall = small;
+        document.getElementById("cartHeading").innerHTML = "My Cart (" + myCart.totalShirts + ")";
+    }
+    setMed(med){
+        this.currMed = med;
+        document.getElementById("cartHeading").innerHTML = "My Cart (" + myCart.totalShirts + ")";
+    }
+    setLarge(large){
+        this.currLarge = large;
+        document.getElementById("cartHeading").innerHTML = "My Cart (" + myCart.totalShirts + ")";
+    }
+
+
+
+}
+    </script>
+    
+    <link rel="stylesheet" href="styleSheets/style.css">
+</head>
+
+<body>
+    <script type="application/javascript"> 
+        let myCart = new Cart(0, 0, 0);
+    </script>
+    
+    <p class="cart" onmouseover="viewCart()" onmouseout="hideCart()">
+        <span id="cartHeading" style="position: relative; right:150px;" onmouseover="viewCart();">
+            <script type="application/javascript">
+                document.getElementById("cartHeading").innerHTML = "My Cart (" + myCart.totalShirts + ")";
+            </script> 
+        </span>
+    </p>
+
+    <span id="cartView"></span>
+    
+    <div class="main">
+        <div id="content">
+            <img id="classicTee" style="height: 600px; width: 400px;" src="images/classic-tee.jpg" alt="Classic Tee">
+            <h1>Classic Tee</h1>
+            <h2>$75</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <br>
+            <p style="font: bold;">SIZE<span class="star">*</span></p>
+            <button class="sizeButton" onclick="myCart.setSmall(myCart.getSmall + 1)">S</button>
+            <button class="sizeButton" onclick="myCart.setMed(myCart.getMed + 1)">M</button>
+            <button class="sizeButton" onclick="myCart.setLarge(myCart.getLarge + 1)">L</button>
+        </div>
+    </div>
+</body>
+</html>
